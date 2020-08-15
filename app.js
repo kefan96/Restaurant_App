@@ -7,7 +7,9 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 
 // .env config
-require("dotenv").config();
+if (process.env.NODE_ENV === 'development') {
+    require("dotenv").config();
+}
 const PORT = process.env.PORT || 8000;
 const ZOMATO_USER_KEY = process.env.ZOMATO_USER_KEY;
 const GOOGLE_MAP_KEY = process.env.GOOGLE_MAP_KEY;

@@ -1,0 +1,60 @@
+<%- include('../Partials/header') %>
+<script>
+    function distance(lat1, lon1, lat2, lon2, unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            var radlat1 = Math.PI * lat1/180;
+            var radlat2 = Math.PI * lat2/180;
+            var theta = lon1-lon2;
+            var radtheta = Math.PI * theta/180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            if (unit=="K") { dist = dist * 1.609344 }
+            if (unit=="N") { dist = dist * 0.8684 }
+            return dist;
+        }
+    }
+
+    function success(position) {
+        const LATITUDE = position.coords.latitude;
+        const LONGITUDE = position.coords.longitude;
+        document.querySelector('#distance').innerHTML = 'Distance: ' + distance(LATITUDE, LONGITUDE, Number('<%= restaurant.location.latitude %>'), Number('<%= restaurant.location.longitude %>'), 'M').toFixed(1) + ' miles';
+    }
+
+    function error() {
+        console.log('no location provided');
+    }
+
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000
+    };
+
+    const watchID = navigator.geolocation.watchPosition(success, error, options);
+</script>
+<script src="https://kit.fontawesome.com/4912714a0b.js" crossorigin="anonymous"></script>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1><%= restaurant.name %></h1>
+        <div style="color: #<%= restaurant.user_rating.rating_color %>">
+            <% for (let i=Number(restaurant.user_rating.aggregate_rating); i >= 0 ; i--) { %>
+            <% if( i== 0.5) { %>
+            <span><i class="fas fa-star-half"></i></span>
+            <% break} %>
+            <span><i class="fas fa-star"></i></span>
+            <% } %>
+        </div>
+        <div class="mt-2">Number of Reviews: <%= restaurant.all_reviews_count %></div>
+        <div class="mt-2">Phone Number: <%= restaurant.phone_numbers %></div>
+        <div class="mt-2">Address: <%= restaurant.location.address %></div>
+        <div class="mt-2" id="distance"></div>
+    </div>
+</div>

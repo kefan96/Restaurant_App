@@ -1,0 +1,48 @@
+<%- include('./Partials/header') %>
+<script>
+    function success(position) {
+        const LATITUDE = position.coords.latitude;
+        const LONGITUDE = position.coords.longitude;
+        document.querySelector('#near').href = `/restaurants?latitude=${LATITUDE}&longitude=${LONGITUDE}`;
+        document.querySelector('#lat').value = LATITUDE;
+        document.querySelector('#lon').value = LONGITUDE;
+    }
+
+    function error() {
+        console.log('no location provided');
+    }
+
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000
+    };
+
+    const watchID = navigator.geolocation.watchPosition(success, error, options);
+</script>
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <a id="near" class="btn btn-secondary btn-lg mt-5" href="/restaurants">Explore Restaurants Near Me</a>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-center">
+        <form action="/restaurants" method="GET" id="search">
+            <input class="form-control mt-3" style="width: 40rem; text-align: center;" type="text" name="name" id=""
+                placeholder="Search by Restaurant Name">
+            <input type="hidden" value="" id="lat" name="latitude">
+            <input type="hidden" value="" id="lon" name="longitude">
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="submit" value="Search" class="btn btn-secondary mt-2">
+        </form>
+    </div>
+    <div class="text-center mt-5">
+        <p>Created by: Kefan Yang</p>
+        <p>Email: ky1323@nyu.edu</p>
+    </div>
+</div>
+
+</body>
+
+</html>

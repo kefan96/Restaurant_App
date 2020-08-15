@@ -1,0 +1,13 @@
+.card a {
+	color: black;
+}
+
+.card a:hover {
+	text-decoration: none;
+	color: purple;
+}
+
+.card-text.price {
+	color: orangered;
+	font-weight: bold;
+}

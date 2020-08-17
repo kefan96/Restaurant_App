@@ -3,6 +3,7 @@
 
 # Restaurants App
 > A frontend exercise by Kefan Yang, for STIT, build in node.js
+> API used: `Zomato` for restaurant information, `Google Map API` for Map View 
 
 [A live demo (on heroku) can be found here](https://morning-plains-38989.herokuapp.com/), if you have any problems, feel free to contact me at ky1323@nyu.edu.
 

@@ -41,24 +41,43 @@ app.get('/restaurants', (req, res) => {
     let url;
     if (latitude && longitude) {
         // use user's location
-        url = `https://developers.zomato.com/api/v2.1/search?lat=${latitude}&lon=${longitude}&count=100`;
+        url = `https://developers.zomato.com/api/v2.1/search?lat=${latitude}&lon=${longitude}`;
     } else {
         // no location input, use new york for default
-        url = `https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city&count=100`;
+        url = `https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city`;
     }
 
-    // 
+    // We have two possible methods to implement search by name, 
+    // first is just filter from the current nearby restaurants by restaurant name,
+    // second is call the api with the keyword parameter q,
+    // we will implement both of them
+
+    // Method 1
+    // if (name) {
+    //     url += "&count=100"
+    // }
+
+    // Method 2
+    if (name) {
+        url += `&q=${name.replace('%20', ' ')}`;
+    }
+
+    // call the search api to search for restaurants nearby
     request.get(url)
         .then(response => {
             let result = response.data;
             let restaurants = {};
             if (name) {
                 str = name.replace('%20', ' ');
-                restaurants = result.restaurants.filter(function (entry) {
-                    return entry.restaurant.name === str
-                }).slice(0, 20);
+                // Method 1
+                // restaurants = result.restaurants.filter(function (entry) {
+                //     return entry.restaurant.name === str
+                // }).slice(0, 20);
+
+                // Method 2
+                restaurants = result.restaurants;
             } else {
-                restaurants = result.restaurants.slice(0, 20);
+                restaurants = result.restaurants;
             }
             // console.log(result);
             res.render('Restaurant/list', {

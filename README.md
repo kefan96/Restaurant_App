@@ -63,6 +63,10 @@ nodemon
 - Every title of the restaurant card in the `List View` is clickable, it will direct you to the `Show Single Restaurant Page`
 <img src="/public/Images/example-listpage.png" alt="list-restaurants-example">
 
+### Search Restaurant Function
+- This app provides to possible ways to search for restaurants by name, the first is `calling the Zomato search API with the parameter q for search keyword`, the second is `calling the regular search API and filter the result with restaurant name strickly equal`. Since the first method gives better result on the page, the App is currently adopting the first method, but you can always switch around, see details in `app.js`
+<img src="/public/Images/example-search.png">
+
 ### Show Single Restaurant Page
 - Displays detailed information for each restaurant, including distance from you
 <img src="/public/Images/showpage-example.png" alt="show-restaurant-example">

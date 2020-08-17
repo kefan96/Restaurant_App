@@ -1,4 +1,4 @@
-## Update!!! Scoll down to the bottom to see thoughs on implementing using React
+## Update!!! Scroll down to the bottom to see thoughs on implementing using React
 
 
 # Restaurants App

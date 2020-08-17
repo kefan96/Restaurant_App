@@ -23,6 +23,7 @@
 > install the dependencies first
 
 ```shell
+cd Restaurant_App
 npm install
 ```
 
@@ -66,6 +67,7 @@ nodemon
 - The list of restaurants is retrived by Zomato search API. Since the API displays the most related 20 restaurants by default, our App also displays 20
 - You will need to enable location sharing to allow the app to get your position dynamically
 - The page has a `List View` and a `Map View` section if you share your position. The `Map View` is a google map with markers indicating your position and your restaurants' position. You can click on `Map View` to go down. And if you hover on the markers, it will give you the name of the restaurants
+- `Map View` will show your location with a red dot if we have your location permission, and it will show restaurants with blue dots. If we don't have user's position, then New York City will be the center of the map
 - Every title of the restaurant card in the `List View` is clickable, it will direct you to the `Show Single Restaurant Page`
 <img src="/public/Images/example-listpage.png" alt="list-restaurants-example">
 

@@ -83,8 +83,9 @@ app.get('/restaurants', (req, res) => {
             res.render('Restaurant/list', {
                 restaurants: restaurants,
                 map_key: GOOGLE_MAP_KEY,
-                lat: latitude,
-                lon: longitude
+                lat: latitude ? latitude : "40.7223277778",
+                lon: longitude ? longitude : "-73.9873500000",
+                hasPosition: latitude ? "true" : "false"
             });
         })
         .catch(err => {

@@ -61,6 +61,7 @@ nodemon
 
 ### List Restaurant Page
 - The page will display the list of restaurants whether you are exploring nearby or searching for names
+- The list of restaurants is retrived by Zomato search API. Since the API displays the most related 20 restaurants by default, our App also displays 20
 - You will need to enable location sharing to allow the app to get your position dynamically
 - The page has a `List View` and a `Map View` section if you share your position. The `Map View` is a google map with markers indicating your position and your restaurants' position. You can click on `Map View` to go down. And if you hover on the markers, it will give you the name of the restaurants
 - Every title of the restaurant card in the `List View` is clickable, it will direct you to the `Show Single Restaurant Page`

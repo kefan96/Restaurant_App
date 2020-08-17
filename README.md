@@ -1,7 +1,10 @@
+## Update!!! Scoll down to the bottom to see thoughs on implementing using React
+
+
 # Restaurants App
 > A frontend exercise by Kefan Yang, for STIT, build in node.js
 
-A live demo (on heroku) can be found [here](https://morning-plains-38989.herokuapp.com/), if you have any problems, feel free to contact me at ky1323@nyu.edu.
+[A live demo (on heroku) can be found here](https://morning-plains-38989.herokuapp.com/), if you have any problems, feel free to contact me at ky1323@nyu.edu.
 
 ## Development Guide
 
@@ -76,3 +79,9 @@ nodemon
 - To process user's position, this app pass latitude and longitude in url query parameters, which may leads to privacy issues, maybe we will need some hash functions
 - A cache can be implemented to reduce the api calls and lower the response time
 - Better design and more information to display obviously
+
+### Thoughts on using React
+- List View: this is simple, in `<App>` component we call the Zomato search API with user's latitude and longitude (or city code if not permitted) in componentDidMount and store the restaurant list in the state using setstate. Then we call the `<RestaurantList>` component, which is a list of `<Restaurant>` component, and we will also pass the values we want to display by props
+- Single Display View: to avoid passing value to a different page, the single display of react can be a popup modal. For each `<Restaurant>` component we will have a `onClick` props which is a function setting the data stored in the state that will be displayed by the popup, and popuing up the modal 
+- Search View: we will have a search bar on the top of the page. The search bar can have a `onChange` prop that will call the zomato search API with q parameter based on the value in the search bar. And we call setState so the data passed to `<RestaurantList>` will be changed. So the list of restaurants below will be expected to change dynamically when the user types in the search bar. If we worry about the cost of calling so many APIs, we can add a button for user to submit search, or we can just filter the current restaurants by name.
+- Map View: this will be the same as the Node.js version.

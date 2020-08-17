@@ -7,9 +7,7 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 
 // .env config
-if (process.env.NODE_ENV === 'development') {
-    require("dotenv").config();
-}
+require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 const ZOMATO_USER_KEY = process.env.ZOMATO_USER_KEY;
 const GOOGLE_MAP_KEY = process.env.GOOGLE_MAP_KEY;
@@ -32,6 +30,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+// route for list restaurants & show search results
 app.get('/restaurants', (req, res) => {
     const {
         latitude,
@@ -42,11 +41,13 @@ app.get('/restaurants', (req, res) => {
     let url;
     if (latitude && longitude) {
         // use user's location
-        url = `https://developers.zomato.com/api/v2.1/search?lat=${latitude}&lon=${longitude}`;
+        url = `https://developers.zomato.com/api/v2.1/search?lat=${latitude}&lon=${longitude}&count=100`;
     } else {
         // no location input, use new york for default
-        url = `https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city`;
+        url = `https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city&count=100`;
     }
+
+    // 
     request.get(url)
         .then(response => {
             let result = response.data;
@@ -55,9 +56,9 @@ app.get('/restaurants', (req, res) => {
                 str = name.replace('%20', ' ');
                 restaurants = result.restaurants.filter(function (entry) {
                     return entry.restaurant.name === str
-                });
+                }).slice(0, 20);
             } else {
-                restaurants = result.restaurants
+                restaurants = result.restaurants.slice(0, 20);
             }
             // console.log(result);
             res.render('Restaurant/list', {

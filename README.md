@@ -2,7 +2,7 @@
 
 
 # Restaurants App
-> A frontend exercise by Kefan Yang, for STIT, build in node.js \\
+> A frontend exercise by Kefan Yang, for STIT, build in node.js 
 
 > API used: `Zomato` for restaurant information, `Google Map API` for Map View 
 
